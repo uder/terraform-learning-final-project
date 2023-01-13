@@ -5,6 +5,8 @@ repos:
     - id: terraform_fmt
     - id: terraform_checkov
     - id: terraform_tfsec
+      args:
+      - --args=--exclude-path .terraform/
     - id: terraform_docs
       args:
       - --args=--config=.terraform-docs.yml
