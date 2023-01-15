@@ -4,6 +4,8 @@ repos:
   hooks:
     - id: terraform_fmt
     - id: terraform_checkov
+      args:
+      - --args=--download-external-modules
     - id: terraform_tfsec
       args:
       - --args=--exclude-path .terraform/
