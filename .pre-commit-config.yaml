@@ -5,7 +5,7 @@ repos:
     - id: terraform_fmt
     - id: terraform_checkov
       args:
-      - --args=--download-external-modules
+      - --args=--download-external-modules vpc
     - id: terraform_tfsec
       args:
       - --args=--exclude-path .terraform/
