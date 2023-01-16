@@ -29,6 +29,12 @@ module "autosacler_group" {
   default_tags         = var.default_tags
 }
 
-output "private_subnet_ids" {
-  value = module.network.private_subnet_ids
+module "load_balancer" {
+  source = "./modules/load_balancer"
+
+  name_prefix        = var.name_prefix
+  vpc_id             = module.network.vpc_id
+  private_subnet_ids = module.network.private_subnet_ids
+  asg_id             = module.autosacler_group.asg_id
 }
+

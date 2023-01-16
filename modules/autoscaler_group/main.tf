@@ -13,10 +13,18 @@ resource "aws_autoscaling_group" "asg" {
     version = "$Latest"
   }
 
-  tags = merge(
-    var.default_tags,
-    {
-      Name = "${var.name_prefix}-asg"
+  #   tags = concat([
+  #     var.default_tags,
+  #     {
+  #       Name = "${var.name_prefix}-asg"
+  #     }
+  #   ])
+  dynamic "tag" {
+    for_each = var.default_tags
+    content {
+      key                 = tag.key
+      value               = tag.value
+      propagate_at_launch = true
     }
-  )
+  }
 }
