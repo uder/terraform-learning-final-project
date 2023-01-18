@@ -13,12 +13,6 @@ resource "aws_lb" "alb" {
   enable_deletion_protection = false
   drop_invalid_header_fields = true
 
-  #   access_logs {
-  #     bucket  = aws_s3_bucket.lb_logs.bucket
-  #     prefix  = "test-lb"
-  #     enabled = true
-  #   }
-
   tags = {
     Environment = "production"
   }

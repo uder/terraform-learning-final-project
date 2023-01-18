@@ -15,13 +15,3 @@ resource "aws_lb_target_group" "www-servers" {
     unhealthy_threshold = 2
   }
 }
-
-# resource "aws_autoscaling_attachment" "www-servers" {
-#   # checkov:skip=CKV2_AWS_15: ELB health check
-#   autoscaling_group_name = var.asg_id
-#   lb_target_group_arn   = aws_lb_target_group.www-servers.arn
-# #   elb                    = aws_lb_target_group.www-servers.id
-# #   lifecycle {
-# #     ignore_changes = [load_balancers, target_group_arns]
-# #   }
-# }

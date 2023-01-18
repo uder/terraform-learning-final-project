@@ -7,7 +7,7 @@ repos:
     - id: terraform_checkov
       args:
       - --args=--download-external-modules vpc
-      - --args=--skip-check CKV2_AWS_1,CKV2_AWS_11,CKV2_AWS_12,CKV2_AWS_19
+      - --args=--skip-check CKV2_AWS_11,CKV2_AWS_12,CKV2_AWS_19
     - id: terraform_tfsec
       args:
       - --args=--exclude-path .terraform/
