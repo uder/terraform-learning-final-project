@@ -2,14 +2,15 @@ resource "aws_lb" "alb" {
   # checkov:skip=CKV_AWS_91: Access log is not needed for test env
   # checkov:skip=CKV2_AWS_20: HTTP is required by task
   # checkov:skip=CKV2_AWS_28: WAF is not required for test env
+  # checkov:skip=CKV_AWS_150: Deletion-Protection is not required for test env
 
   name               = "${var.name_prefix}-alb"
   internal           = false # tfsec:ignore:aws-elb-alb-not-public
   load_balancer_type = "application"
   security_groups    = [aws_security_group.allow_http.id]
-  subnets            = var.private_subnet_ids
+  subnets            = var.public_subnet_ids
 
-  enable_deletion_protection = true
+  enable_deletion_protection = false
   drop_invalid_header_fields = true
 
   #   access_logs {

@@ -24,17 +24,20 @@ module "autosacler_group" {
     desired_size       = var.asg_desired_size
     private_subnet_ids = module.network.private_subnet_ids
   }
-  instance_type        = var.instance_type
-  ami_owner_account_id = var.ami_owner_account_id
-  default_tags         = var.default_tags
+  vpc_id                = module.network.vpc_id
+  instance_type         = var.instance_type
+  ami_owner_account_id  = var.ami_owner_account_id
+  target_group_arn      = module.load_balancer.target_group_arn
+  alb_security_group_id = module.load_balancer.security_group_id
+  default_tags          = var.default_tags
 }
 
 module "load_balancer" {
   source = "./modules/load_balancer"
 
-  name_prefix        = var.name_prefix
-  vpc_id             = module.network.vpc_id
-  private_subnet_ids = module.network.private_subnet_ids
-  asg_id             = module.autosacler_group.asg_id
+  name_prefix       = var.name_prefix
+  vpc_id            = module.network.vpc_id
+  public_subnet_ids = module.network.public_subnet_ids
+  asg_id            = module.autosacler_group.asg_id
 }
 

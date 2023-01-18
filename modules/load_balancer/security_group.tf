@@ -6,6 +6,14 @@ resource "aws_security_group" "allow_http" {
   vpc_id      = var.vpc_id
 
   ingress {
+    description = "ICMP from any"
+    from_port   = 8
+    to_port     = 0
+    protocol    = "icmp"
+    cidr_blocks = ["0.0.0.0/0"] # tfsec:ignore:aws-ec2-no-public-ingress-sgr Public access is required by task
+  }
+
+  ingress {
     description = "HTTP from any"
     from_port   = 80
     to_port     = 80
@@ -13,13 +21,13 @@ resource "aws_security_group" "allow_http" {
     cidr_blocks = ["0.0.0.0/0"] # tfsec:ignore:aws-ec2-no-public-ingress-sgr Public access is required by task
   }
 
-  #   egress {
-  #     from_port        = 0
-  #     to_port          = 0
-  #     protocol         = "-1"
-  #     cidr_blocks      = ["0.0.0.0/0"]
-  #     ipv6_cidr_blocks = ["::/0"]
-  #   }
+  egress {
+    description = "Allow any outbound trafic"
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"] # tfsec:ignore:aws-ec2-no-public-egress-sgr Public access is required by task
+  }
 
   tags = {
     Name = "${var.name_prefix}-sg-allow-http"

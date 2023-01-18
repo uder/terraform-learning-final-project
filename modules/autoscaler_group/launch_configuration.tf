@@ -8,12 +8,19 @@ data "aws_ami" "latest" {
   }
 }
 
-resource "aws_launch_template" "launch_template" {
-  name_prefix   = "${var.name_prefix}-launch-template"
-  image_id      = data.aws_ami.latest.id
-  instance_type = var.instance_type
+resource "aws_launch_configuration" "www" { # tfsec:ignore:aws-ec2-enable-launch-config-at-rest-encryption Public access is required by task
+  # checkov:skip=CKV_AWS_8 EBS encription is not required for test env
+  name_prefix     = "${var.name_prefix}-launch-config"
+  image_id        = data.aws_ami.latest.id
+  instance_type   = var.instance_type
+  security_groups = [aws_security_group.asg_instance.id, var.alb_security_group_id]
+
   metadata_options {
     http_endpoint = "enabled"
     http_tokens   = "required"
+  }
+
+  lifecycle {
+    create_before_destroy = true
   }
 }

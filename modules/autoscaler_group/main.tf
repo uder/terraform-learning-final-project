@@ -7,18 +7,10 @@ resource "aws_autoscaling_group" "asg" {
   health_check_type         = "ELB"
   force_delete              = true
   vpc_zone_identifier       = var.asg_params.private_subnet_ids
+  target_group_arns         = [var.target_group_arn]
 
-  launch_template {
-    id      = aws_launch_template.launch_template.id
-    version = "$Latest"
-  }
+  launch_configuration = aws_launch_configuration.www.name
 
-  #   tags = concat([
-  #     var.default_tags,
-  #     {
-  #       Name = "${var.name_prefix}-asg"
-  #     }
-  #   ])
   dynamic "tag" {
     for_each = var.default_tags
     content {

@@ -49,6 +49,21 @@ variable "asg_params" {
   }
 }
 
+variable "vpc_id" {
+  description = "VPC ID"
+  type        = string
+}
+
+variable "target_group_arn" {
+  description = "ALB Target group ARN"
+  type        = string
+}
+
+variable "alb_security_group_id" {
+  description = "ALB Security group id"
+  type        = string
+}
+
 variable "default_tags" {
   description = "Tags"
   type        = map(string)

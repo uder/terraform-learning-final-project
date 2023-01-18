@@ -40,7 +40,7 @@ variable "vpc_cidr" {
 variable "instance_type" {
   description = "AWS Instance type"
   type        = string
-  default     = "t3.micro"
+  default     = "t2.micro"
 }
 
 variable "asg_max_size" {
