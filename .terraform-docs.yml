@@ -1,7 +1,13 @@
 formatter: "markdown"
 
+recursive:
+    enabled: true
+    path: modules
+
 output:
-file: "README.md"
-mode: replace
-template: |-
-    {{/** End of file fixer */}}
+    file: "README.md"
+    mode: replace
+    template: |-
+        <!-- BEGIN_TF_DOCS -->
+        {{ .Content }}
+        <!-- END_TF_DOCS --> 

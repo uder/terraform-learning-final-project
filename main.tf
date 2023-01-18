@@ -41,4 +41,3 @@ module "load_balancer" {
   asg_id            = module.autosacler_group.asg_id
   allow_client_cidr = var.allow_client_cidr
 }
-
