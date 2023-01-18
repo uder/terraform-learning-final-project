@@ -11,7 +11,7 @@ variable "aws_region" {
 variable "instance_type" {
   description = "AWS Instance type"
   type = string
-  default = "t3.micro"  
+  default = "t2.micro"  
 }
 
 source "amazon-ebs" "prototype" {

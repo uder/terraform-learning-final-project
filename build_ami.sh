@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-packer build .
+time packer build .
