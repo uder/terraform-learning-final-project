@@ -71,3 +71,9 @@ variable "aws_subnets_number" {
     error_message = "Number of AZ have to be 3 or less."
   }
 }
+
+variable "allow_client_cidr" {
+  description = "Network with trusted clients"
+  type        = string
+  default     = "0.0.0.0/0"
+}

@@ -39,5 +39,6 @@ module "load_balancer" {
   vpc_id            = module.network.vpc_id
   public_subnet_ids = module.network.public_subnet_ids
   asg_id            = module.autosacler_group.asg_id
+  allow_client_cidr = var.allow_client_cidr
 }
 
